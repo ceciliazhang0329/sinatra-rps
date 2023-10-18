@@ -35,7 +35,7 @@ get("/rock") do
   @computer = "They played #{get_computer_choice}!"
   @result = determine_winner(player_choice, get_computer_choice)
 
-  erb(:rock)
+  erb(":rock")
 end
 
 get("/paper") do
@@ -61,7 +61,7 @@ get("/paper") do
   @computer = "They played #{get_computer_choice}!"
   @result = determine_winner(player_choice, get_computer_choice)
 
-  erb(:rock)
+  erb(:paper)
 end
 
 get("/scissors") do
@@ -87,5 +87,5 @@ get("/scissors") do
   @computer = "They played #{get_computer_choice}!"
   @result = determine_winner(player_choice, get_computer_choice)
 
-  erb(:rock)
+  erb(:scissors)
 end
