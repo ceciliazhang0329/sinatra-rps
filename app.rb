@@ -12,80 +12,28 @@ get("/") do
   erb(:rule)
 end
 
-get("/rock") do
-  player_choice = "rock"
-  def get_computer_choice
-    choices = ["rock", "paper", "scissors"]
-    computer_choice = choices[rand(3)]
-  end
-  
-  def determine_winner(player_choice, computer_choice)
-    if player_choice == computer_choice
-      "We tied!"
-    elsif (player_choice == "rock" && computer_choice == "scissors") ||
-          (player_choice == "paper" && computer_choice == "rock") ||
-          (player_choice == "scissors" && computer_choice == "paper")
-      "We win!"
-    else
-      "We lost!"
-    end
-  end
-
-  @player = "We played #{player_choice}!"
-  @computer = "They played #{get_computer_choice}!"
-  @result = determine_winner(player_choice, get_computer_choice)
-
-  erb(":rock")
+def get_computer_choice
+  choices = ["rock", "paper", "scissors"]
+  choices[rand(3)]
 end
 
-get("/paper") do
-  player_choice = "paper"
-  def get_computer_choice
-    choices = ["rock", "paper", "scissors"]
-    computer_choice = choices[rand(3)]
+def determine_winner(player_choice, computer_choice)
+  if player_choice == computer_choice
+    "We tied!"
+  elsif (player_choice == "rock" && computer_choice == "scissors") ||
+        (player_choice == "paper" && computer_choice == "rock") ||
+        (player_choice == "scissors" && computer_choice == "paper")
+    "We win!"
+  else
+    "We lost!"
   end
-  
-  def determine_winner(player_choice, computer_choice)
-    if player_choice == computer_choice
-      "We tied!"
-    elsif (player_choice == "rock" && computer_choice == "scissors") ||
-          (player_choice == "paper" && computer_choice == "rock") ||
-          (player_choice == "scissors" && computer_choice == "paper")
-      "We win!"
-    else
-      "We lost!"
-    end
-  end
-
-  @player = "We played #{player_choice}!"
-  @computer = "They played #{get_computer_choice}!"
-  @result = determine_winner(player_choice, get_computer_choice)
-
-  erb(:paper)
 end
 
-get("/scissors") do
-  player_choice = "scissors"
-  def get_computer_choice
-    choices = ["rock", "paper", "scissors"]
-    computer_choice = choices[rand(3)]
-  end
-  
-  def determine_winner(player_choice, computer_choice)
-    if player_choice == computer_choice
-      "We tied!"
-    elsif (player_choice == "rock" && computer_choice == "scissors") ||
-          (player_choice == "paper" && computer_choice == "rock") ||
-          (player_choice == "scissors" && computer_choice == "paper")
-      "We win!"
-    else
-      "We lost!"
-    end
-  end
-
+get("/:choice") do
+  player_choice = params[:choice]
+  computer_choice = get_computer_choice
   @player = "We played #{player_choice}!"
-  @computer = "They played #{get_computer_choice}!"
-  @result = determine_winner(player_choice, get_computer_choice)
-
-  erb(:scissors)
+  @computer = "They played #{computer_choice}!"
+  @result = determine_winner(player_choice, computer_choice) 
+  erb(:game_template)
 end
